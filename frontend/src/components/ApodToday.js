@@ -11,8 +11,7 @@ function ApodToday() {
         setApod(data);
         setLoading(false);
       })
-      .catch((err) => {
-        console.error("Failed to fetch APOD:", err);
+      .catch(() => {
         setLoading(false);
       });
   }, []);
@@ -22,11 +21,31 @@ function ApodToday() {
 
   return (
     <div>
-      <h2>{apod.title}</h2>
-      <img src={apod.url} alt={apod.title} style={{ maxWidth: "100%" }} />
-      <p>{apod.explanation}</p>
+      {/* Title left-aligned */}
+      <h2 style={{ textAlign: "left", marginLeft: "0", fontWeight: 700 }}>
+        {apod.title}
+      </h2>
+      {/* Image and text remain centered */}
+      <div style={{ display: "flex", justifyContent: "center", margin: "20px 0" }}>
+        <img
+          src={apod.url}
+          alt={apod.title}
+          style={{
+            maxWidth: "100%",
+            maxHeight: "500px",
+            width: "auto",
+            height: "auto",
+            borderRadius: "8px",
+            boxShadow: "0 2px 8px #ddd"
+          }}
+        />
+      </div>
+      <p style={{ maxWidth: "800px", margin: "0 auto", textAlign: "center" }}>
+        {apod.explanation}
+      </p>
     </div>
   );
 }
 
 export default ApodToday;
+
